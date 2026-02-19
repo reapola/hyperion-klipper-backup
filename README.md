@@ -1,6 +1,6 @@
 ## Annex K3
 
-![printer](./assets/k3.png)
+![printer](./assets/k3.jpg)
 
 - 180x180mm Bed
 - Mellow NF Crazy
