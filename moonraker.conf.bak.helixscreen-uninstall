@@ -1,0 +1,179 @@
+[server]
+host: 0.0.0.0
+port: 7125
+# Verbose logging used for debugging . Default False.
+# The maximum size allowed for a file upload (in MiB).  Default 1024 MiB
+max_upload_size: 1024
+klippy_uds_address: /home/reapola/printer_data/comms/klippy.sock
+
+[file_manager]
+# post processing for object cancel. Not recommended for low resource SBCs such as a Pi Zero. Default False 
+enable_object_processing: True
+
+[authorization]
+cors_domains:
+    *.lan
+    *.local
+    *://localhost
+    *://localhost:*
+    *://my.mainsail.xyz
+    *://app.fluidd.xyz
+
+trusted_clients:
+    10.0.0.0/8
+    127.0.0.0/8
+    169.254.0.0/16
+    172.16.0.0/12
+    192.168.0.0/16
+    FE80::/10
+    ::1/128
+    127.0.0.1
+
+# enables partial support of Octoprint API
+[octoprint_compat]
+
+# enables moonraker to track and store print history.
+[history]
+
+#[wled lights]
+#type: http
+#address: 192.168.178.85
+#initial_preset: 1
+#chain_count: 60
+
+# Use the systemd CLI provider rather than the DBus Provider
+[machine]
+provider: systemd_cli
+
+# Edit your existing [update_manager] section to disable
+# PackageKit.  This will fallback to the APT CLI Package Update
+# implementation.
+[update_manager]
+#..other update manager options
+refresh_interval: 672
+enable_packagekit: False
+
+[spoolman]
+server: http://192.168.182.24:8000
+#   URL to the Spoolman instance. This parameter must be provided.
+sync_rate: 5
+#   The interval, in seconds, between sync requests with the
+#   Spoolman server.  The default is 5.
+
+# enables moonraker to track and store print history.
+
+[analysis]
+platform: rpi
+#   The platform flavor of Klipper Estimator to use.  Must be a choice
+#   from rpi, linux, osx, and auto. Note that "rpi" supports armv7 and
+#   aarch64 linux platforms, whereas "linux" supports amd64 linux
+#   platform.  The auto choice will attempt to automatically determine
+#   the correct platform.  The default is auto.
+#estimator_config: 
+#   A path relative to the "config" root specifying a config
+#   file to use for Klipper Estimator.  The default is to
+#   use a configuration dumped with data retrieved from Klipper's
+#   current settings.
+auto_dump_default_config: true
+#   When set to true the default configuration for Klipper Estimator
+#   will be dumped every time Klippy restarts.  When false the
+#   configuration is only dumped if the default configuration file
+#   does not exist.  The default is false.
+estimator_timeout: 600
+#   The maximum amount of time (in seconds) Klipper Estimator
+#   is given to process a gcode file before processing is
+#   aborted.  The default is 600 seconds.
+enable_auto_analysis: true
+#   When set to true Klipper Estimator will be used to perform a
+#   post-process on gcode files immediately prior to metadata extraction.
+#   The post-process will update the time estimate and M73 commands present
+#   in the gcode file.  This automates the time analysis for any event
+#   that triggers metadata processing.   Default is false.
+enable_estimator_updates: true
+#   When true Moonraker will create and register an entry for
+#   klipper_estimator with the update manager.  Default is false.
+
+[update_manager fluidd]
+type: web
+repo: fluidd-core/fluidd
+path: ~/fluidd
+
+[update_manager mobileraker]
+type: git_repo
+path: ~/mobileraker_companion
+origin: https://github.com/Clon1998/mobileraker_companion.git
+primary_branch:main
+managed_services: mobileraker
+virtualenv: ~/mobileraker-env
+requirements: scripts/mobileraker-requirements.txt
+install_script: scripts/install.sh
+
+[include octoeverywhere-system.cfg]
+
+[update_manager beacon]
+type: git_repo
+channel: dev
+path: ~/beacon_klipper
+origin: https://github.com/beacon3d/beacon_klipper.git
+env: ~/klippy-env/bin/python
+requirements: requirements.txt
+install_script: install.sh
+is_system_service: False
+managed_services: klipper
+info_tags:
+  desc=Beacon Surface Scanner
+
+[update_manager mainsail]
+type: web
+channel: stable
+repo: mainsail-crew/mainsail
+path: ~/mainsail
+
+[update_manager Klippain-ShakeTune]
+type: git_repo
+origin: https://github.com/Frix-x/klippain-shaketune.git
+path: ~/klippain_shaketune
+virtualenv: ~/klippy-env
+requirements: requirements.txt
+system_dependencies: system-dependencies.json
+primary_branch: main
+managed_services: klipper
+
+[update_manager led_effect]
+type: git_repo
+path: ~/klipper-led_effect
+origin: https://github.com/julianschill/klipper-led_effect.git
+is_system_service: False
+
+[update_manager klipper_tmc_autotune]
+type: git_repo
+channel: dev
+path: ~/klipper_tmc_autotune
+origin: https://github.com/andrewmcgr/klipper_tmc_autotune.git
+managed_services: klipper
+primary_branch: main
+install_script: install.sh
+
+[update_manager klipper]
+channel: stable
+
+[update_manager crowsnest]
+type: git_repo
+path: ~/crowsnest
+origin: https://github.com/mainsail-crew/crowsnest.git
+primary_branch: v5
+managed_services: crowsnest
+system_dependencies: system-dependencies.json
+virtualenv: ~/crowsnest-env
+requirements: requirements.txt
+
+# HelixScreen Update Manager
+# Added by HelixScreen installer - enables one-click updates from Mainsail/Fluidd
+# NOTE: type: web is used instead of type: zip as a workaround for
+# mainsail-crew/mainsail#2444 (zip type always shows UP-TO-DATE).
+# A systemd path unit handles service restart after Moonraker extracts the update.
+[update_manager helixscreen]
+type: web
+channel: stable
+repo: prestonbrown/helixscreen
+path: /home/reapola/helixscreen
