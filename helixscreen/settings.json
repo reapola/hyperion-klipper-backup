@@ -1,0 +1,435 @@
+{
+  "active_printer_id": "default",
+  "config_version": 31,
+  "dark_mode": true,
+  "display": {
+    "bed_mesh_render_mode": 0,
+    "dim_brightness": 30,
+    "dim_sec": 600,
+    "drm_device": "",
+    "gcode_render_mode": 0,
+    "glass_probe": {
+      "board": "egl/4c/100bm/400x1280/32bpp",
+      "frame_ms": 5.990055,
+      "passed": true,
+      "version": "1.1.0-beta.14 (6900767)"
+    },
+    "gpu_3d_blocked": false,
+    "gpu_blur_blocked": false,
+    "rotate": 0,
+    "rotation_probed": true,
+    "screensaver_levels": {
+      "flipclock": {
+        "board": "egl/4c/100bm/400x1280/32bpp",
+        "level": 2,
+        "too_heavy": false,
+        "version": "1.1.0-beta.12 (00a9fe6)"
+      }
+    },
+    "screensaver_type": "flipclock",
+    "sleep_sec": 1200
+  },
+  "gcode_viewer": {
+    "tube_sides": 4
+  },
+  "input": {
+    "calibration": {
+      "a": 1.0,
+      "b": 0.0035475902259349823,
+      "c": -0.04690801724791527,
+      "d": -0.004380165599286556,
+      "e": 1.0,
+      "f": 1.7370076179504395,
+      "rotation": 0,
+      "valid": true
+    },
+    "long_press_time": 500,
+    "scroll_limit": 10,
+    "scroll_throw": 25,
+    "touch_device": "",
+    "touch_range": {
+      "max_x": -25,
+      "max_y": 4128,
+      "min_x": 4068,
+      "min_y": -43,
+      "rotation": 0,
+      "swap_axes": true,
+      "valid": true
+    }
+  },
+  "language": "en",
+  "log_path": "/tmp/helixscreen.log",
+  "motion": {
+    "jog_mode": 1
+  },
+  "print_start_history": {
+    "entries": [
+      {
+        "phases": {
+          "BED_MESH": 87,
+          "CLEANING": 8,
+          "PURGING": 1,
+          "SOAKING": 93
+        },
+        "temp_bucket": 1,
+        "timestamp": 1792800107,
+        "total": 529,
+        "window": 1
+      },
+      {
+        "phases": {
+          "BED_MESH": 88,
+          "CLEANING": 4,
+          "PURGING": 1,
+          "SOAKING": 95
+        },
+        "temp_bucket": 1,
+        "timestamp": 1792827429,
+        "total": 537,
+        "window": 1
+      },
+      {
+        "phases": {
+          "BED_MESH": 103,
+          "CLEANING": 8,
+          "HOMING": 35,
+          "PURGING": 1
+        },
+        "skipped": [],
+        "temp_bucket": 2,
+        "timestamp": 1792871890,
+        "total": 570,
+        "window": 1
+      },
+      {
+        "phases": {
+          "BED_MESH": 104,
+          "CLEANING": 7,
+          "PURGING": 1,
+          "SOAKING": 710
+        },
+        "temp_bucket": 2,
+        "timestamp": 1792879663,
+        "total": 1257,
+        "window": 1
+      },
+      {
+        "heating": 300,
+        "phases": {
+          "BED_MESH": 98,
+          "CLEANING": 5,
+          "HOMING": 29,
+          "PURGING": 1
+        },
+        "skipped": [],
+        "temp_bucket": 1,
+        "timestamp": 1793223296,
+        "total": 673,
+        "window": 1
+      },
+      {
+        "heating": 444,
+        "phases": {
+          "BED_MESH": 98,
+          "CLEANING": 6,
+          "PURGING": 1,
+          "SOAKING": 96
+        },
+        "temp_bucket": 1,
+        "timestamp": 1793265062,
+        "total": 692,
+        "window": 1
+      },
+      {
+        "heating": 493,
+        "phases": {
+          "BED_MESH": 104,
+          "CLEANING": 9,
+          "PURGING": 1,
+          "SOAKING": 94
+        },
+        "temp_bucket": 1,
+        "timestamp": 1793271720,
+        "total": 718,
+        "window": 1
+      }
+    ]
+  },
+  "printers": {
+    "default": {
+      "bed_occupancy": {
+        "last_occupied": "{\"filename\":\"K3_pulley_jig_0.15mm_PETG_47m39s_25g.gcode\",\"job_id\":\"0001F0\",\"object_height\":17.05,\"start_time\":1793271002.0333157}",
+        "outlines": "{\"filename\":\"K3_pulley_jig_0.15mm_PETG_47m39s_25g.gcode\",\"objects\":[[[44.1,38.2],[53.1,38.2],[53.1,88.2],[44.1,88.2],[44.1,38.2]],[[56.6,91.8],[68.6,91.8],[68.6,141.8],[56.6,141.8],[56.6,91.8]],[[105.8,81.5],[106.2,81.1],[135.5,81.1],[135.9,81.5],[135.9,101.3],[135.6,103.0],[134.8,104.2],[134.1,105.0],[133.1,105.6],[131.2,106.1],[110.6,106.1],[108.9,105.7],[107.7,105.0],[106.5,103.5],[106.0,102.5],[105.8,101.3],[105.8,81.5]],[[72.2,81.5],[72.6,81.1],[101.9,81.1],[102.3,81.5],[102.3,101.3],[101.9,103.0],[101.2,104.2],[100.4,105.0],[99.4,105.6],[97.6,106.1],[76.9,106.1],[75.3,105.7],[74.1,105.0],[72.8,103.5],[72.4,102.5],[72.2,101.3],[72.2,81.5]],[[61.6,38.2],[68.6,38.2],[68.6,88.2],[61.6,88.2],[61.6,38.2]],[[44.1,91.8],[53.1,91.8],[53.1,141.8],[44.1,141.8],[44.1,91.8]],[[109.9,61.0],[110.2,59.6],[110.9,58.4],[111.9,57.5],[113.5,57.0],[132.1,57.0],[133.1,57.2],[134.1,57.7],[134.8,58.3],[135.4,59.0],[135.9,60.6],[135.9,77.5],[109.9,77.5],[109.9,61.0]],[[80.4,61.0],[80.6,59.6],[81.3,58.4],[82.4,57.5],[83.9,57.0],[102.6,57.0],[103.5,57.2],[104.6,57.7],[105.3,58.3],[105.8,59.0],[106.4,60.6],[106.4,77.5],[80.4,77.5],[80.4,61.0]],[[88.9,119.2],[94.7,112.7],[103.9,109.6],[120.9,109.6],[130.0,112.7],[130.4,113.0],[135.9,129.2],[135.9,136.0],[112.0,141.8],[105.2,141.8],[94.6,134.8],[88.9,126.0],[88.9,119.2]]]}"
+      },
+      "default_macros": {
+        "cooldown": "SET_HEATER_TEMPERATURE HEATER=extruder TARGET=0\nSET_HEATER_TEMPERATURE HEATER=heater_bed TARGET=0",
+        "load_filament": {
+          "gcode": "LOAD_FILAMENT",
+          "label": "Load"
+        },
+        "macro_1": {
+          "gcode": "HELIX_CLEAN_NOZZLE",
+          "label": "Clean Nozzle"
+        },
+        "macro_2": {
+          "gcode": "HELIX_BED_MESH_IF_NEEDED",
+          "label": "Bed Level"
+        },
+        "unload_filament": {
+          "gcode": "UNLOAD_FILAMENT",
+          "label": "Unload"
+        }
+      },
+      "extra_sensors": {},
+      "fans": {
+        "chamber": "fan_generic nevermore",
+        "exhaust": "",
+        "hotend": "heater_fan hotend_fan",
+        "part": "fan"
+      },
+      "filament": {
+        "external_spool": {
+          "assigned": true,
+          "bed_temp": 90,
+          "brand": "Uzy",
+          "catalog_id": "",
+          "color_rgb": 1114367,
+          "material": "PETG",
+          "nozzle_temp_max": 250,
+          "nozzle_temp_min": 250,
+          "product_name": "",
+          "remaining_weight_g": 195.431640625,
+          "spool_name": "Classic Blue",
+          "spoolman_id": 93,
+          "total_weight_g": 1000.0
+        }
+      },
+      "hardware": {
+        "expected": [
+          "heater_bed",
+          "extruder",
+          "fan",
+          "heater_fan hotend_fan",
+          "neopixel led_rear"
+        ],
+        "last_snapshot": {
+          "fans": [
+            "heater_fan hotend_fan",
+            "fan",
+            "controller_fan casefans",
+            "fan_generic nevermore"
+          ],
+          "filament_sensors": [],
+          "heaters": [
+            "heater_bed",
+            "extruder"
+          ],
+          "leds": [
+            "neopixel led_rear",
+            "neopixel led_front"
+          ],
+          "sensors": [
+            "temperature_sensor beacon_coil",
+            "tmc5160 stepper_x",
+            "tmc5160 stepper_x1",
+            "tmc5160 stepper_y",
+            "tmc5160 stepper_y1",
+            "temperature_sensor chamber",
+            "temperature_sensor Octopus",
+            "temperature_sensor raspberry_pi"
+          ],
+          "timestamp": "2026-10-30T00:44:31Z"
+        },
+        "optional": [
+          "controller_fan casefans"
+        ]
+      },
+      "heaters": {
+        "bed": "heater_bed",
+        "hotend": "extruder"
+      },
+      "leds": {
+        "auto_state": {
+          "strips": [
+            "neopixel led_rear"
+          ]
+        },
+        "color_presets": [
+          "#FFFFFF",
+          "#FFD700",
+          "#FF6B35",
+          "#4FC3F7",
+          "#FF4444",
+          "#66BB6A",
+          "#9C27B0",
+          "#00BCD4"
+        ],
+        "last_brightness": 100,
+        "last_color": "#FFFFFF",
+        "last_white": 0.0,
+        "led_on_at_start": false,
+        "light_button_pending": null,
+        "macro_devices": [],
+        "selected": [],
+        "selected_strips": [
+          "neopixel led_rear"
+        ],
+        "startup_brightness": 80,
+        "strip": "neopixel led_rear"
+      },
+      "maintenance": {
+        "meters": {
+          "filter": {
+            "interval_h": 200,
+            "notified": false,
+            "used_h": 11.153611111102677
+          },
+          "nozzle": {
+            "interval_h": 500,
+            "notified": false,
+            "used_h": 11.153611111102677
+          },
+          "rails": {
+            "interval_h": 300,
+            "notified": false,
+            "used_h": 11.153611111102677
+          }
+        },
+        "total_h": 11.153611111102677
+      },
+      "moonraker_api_key": false,
+      "moonraker_host": "127.0.0.1",
+      "moonraker_port": 7125,
+      "panel_widgets": {
+        "home": {
+          "grid": "10x28",
+          "main_page_index": 0,
+          "next_page_id": 1,
+          "pages": [
+            {
+              "id": "main",
+              "widgets": [
+                {
+                  "col": 0,
+                  "colspan": 6,
+                  "enabled": true,
+                  "id": "printer_image",
+                  "row": 0,
+                  "rowspan": 6
+                },
+                {
+                  "col": 0,
+                  "colspan": 10,
+                  "enabled": true,
+                  "id": "print_status",
+                  "row": 6,
+                  "rowspan": 6
+                },
+                {
+                  "col": 6,
+                  "colspan": 4,
+                  "config": {
+                    "led": "neopixel led_rear"
+                  },
+                  "enabled": true,
+                  "id": "led",
+                  "row": 2,
+                  "rowspan": 2
+                },
+                {
+                  "col": 5,
+                  "colspan": 5,
+                  "enabled": true,
+                  "id": "fan_stack",
+                  "row": 20,
+                  "rowspan": 2
+                },
+                {
+                  "col": 0,
+                  "colspan": 5,
+                  "enabled": true,
+                  "id": "temperature",
+                  "row": 22,
+                  "rowspan": 3
+                },
+                {
+                  "col": 5,
+                  "colspan": 5,
+                  "enabled": true,
+                  "id": "filament",
+                  "row": 22,
+                  "rowspan": 3
+                },
+                {
+                  "col": 6,
+                  "colspan": 4,
+                  "enabled": true,
+                  "id": "notifications",
+                  "row": 0,
+                  "rowspan": 2
+                },
+                {
+                  "col": 5,
+                  "colspan": 5,
+                  "enabled": true,
+                  "id": "bed_temperature",
+                  "row": 25,
+                  "rowspan": 3
+                },
+                {
+                  "col": -1,
+                  "colspan": 8,
+                  "enabled": false,
+                  "id": "tips",
+                  "row": -1,
+                  "rowspan": 4
+                },
+                {
+                  "col": 0,
+                  "colspan": 10,
+                  "enabled": true,
+                  "id": "temp_graph:1",
+                  "row": 12,
+                  "rowspan": 8
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "printer_image": "shipped:generic-corexy",
+      "printer_name": "Hyperion",
+      "temp_sensors": {
+        "bed": "heater_bed",
+        "hotend": "extruder"
+      },
+      "type": "Custom/Other",
+      "wizard_completed": true
+    },
+    "show_printer_switcher": false
+  },
+  "telemetry_enabled": false,
+  "theme": {
+    "preset": 0
+  },
+  "thermal": {
+    "rates": {
+      "extruder": {
+        "heat_rate": 1.2260215282440186
+      },
+      "heater_bed": {
+        "heat_rate": 3.6186349391937256
+      }
+    }
+  },
+  "tour": {
+    "completed": true,
+    "last_seen_version": 1
+  },
+  "ui": {},
+  "update": {
+    "channel": 1,
+    "moonraker_channel": "beta"
+  },
+  "wizard_completed": true
+}
