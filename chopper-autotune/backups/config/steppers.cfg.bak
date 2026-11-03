@@ -1,0 +1,229 @@
+[constants]
+run_current_xy:  1.8
+dwell_time_xy: 0.5
+#driver_tbl_xy: 1
+#driver_toff_xy: 3
+#driver_hsrt_xy: 1
+#driver_hend_xy: 3
+interpolate_xy: false 
+driver_sgt_xy: -1
+
+run_current_z:  1
+driver_tbl_z: 1
+driver_toff_z: 3
+driver_hsrt_z: 7
+driver_hend_z: 8
+interpolate_z: true
+stealthchop_z: 0
+
+
+#####################################################################
+#   X/Y Stepper Settings
+#####################################################################
+
+[stepper_x]
+# connected to Motor 1
+step_pin: PC13
+dir_pin: !PC14
+enable_pin: !PE6
+rotation_distance: 40
+microsteps: 32
+full_steps_per_rotation: 400
+endstop_pin: tmc5160_stepper_x:virtual_endstop
+position_min: -9
+position_endstop: 180
+position_max: 180
+homing_speed: 100
+homing_retract_dist: 5
+homing_retract_speed: 20
+min_home_dist: 40
+use_sensorless_homing: true
+
+[stepper_x1]
+# connected to Motor 2
+step_pin: PE4
+dir_pin: PE5
+enable_pin: !PE3
+# 0.9deg - 160 steps per mm - 1/16 microstepping
+endstop_pin: tmc5160_stepper_x1:virtual_endstop
+rotation_distance: 40
+microsteps: 32
+full_steps_per_rotation: 400
+
+
+[stepper_y]
+# connected to Motor 3
+step_pin: PE1
+dir_pin: !PE0
+enable_pin: !PE2
+# 0.9deg - 160 steps per mm - 1/16 microstepping
+rotation_distance: 40
+microsteps: 32
+full_steps_per_rotation: 400
+endstop_pin: tmc5160_stepper_y:virtual_endstop
+position_min: 0
+position_endstop: 0
+position_max: 184.5
+homing_speed: 100
+homing_retract_dist: 5
+homing_retract_speed: 20
+min_home_dist: 40
+use_sensorless_homing: true
+
+[stepper_y1]
+# connected to Motor 4
+step_pin: PB8
+dir_pin: PB9
+enable_pin: !PB7
+# 0.9deg - 160 steps per mm - 1/16 microstepping
+endstop_pin: tmc5160_stepper_y1:virtual_endstop
+rotation_distance: 40
+microsteps: 32
+full_steps_per_rotation: 400
+
+[tmc5160 stepper_x]
+spi_speed: 500000
+spi_software_sclk_pin: PE12
+spi_software_mosi_pin: PE14
+spi_software_miso_pin: PE13
+cs_pin: PG14
+sense_resistor: 0.075
+diag1_pin: ^!PF0  
+home_current: 1
+current_change_dwell_time: ${constants.dwell_time_xy}
+interpolate: ${constants.interpolate_xy}
+run_current: ${constants.run_current_xy}
+#driver_TBL: ${constants.driver_tbl_xy}
+#driver_TOFF: ${constants.driver_toff_xy}
+#driver_HSTRT: ${constants.driver_hsrt_xy}
+#driver_HEND: ${constants.driver_hend_xy}
+driver_SGT: ${constants.driver_sgt_xy}
+
+[tmc5160 stepper_x1]
+spi_speed: 500000
+spi_software_sclk_pin: PE12
+spi_software_mosi_pin: PE14
+spi_software_miso_pin: PE13
+cs_pin: PG13
+sense_resistor: 0.075
+diag1_pin: ^!PF2   
+home_current: 1
+current_change_dwell_time: ${constants.dwell_time_xy}
+interpolate: ${constants.interpolate_xy}
+run_current: ${constants.run_current_xy}
+#driver_TBL: ${constants.driver_tbl_xy}
+#driver_TOFF: ${constants.driver_toff_xy}
+#driver_HSTRT: ${constants.driver_hsrt_xy}
+#driver_HEND: ${constants.driver_hend_xy}
+driver_SGT: ${constants.driver_sgt_xy}
+
+[tmc5160 stepper_y]
+spi_speed: 500000
+spi_software_sclk_pin: PE12
+spi_software_mosi_pin: PE14
+spi_software_miso_pin: PE13
+cs_pin: PG12
+sense_resistor: 0.075
+diag1_pin: ^!PF4
+home_current: 1
+current_change_dwell_time: ${constants.dwell_time_xy}
+interpolate: ${constants.interpolate_xy}
+run_current: ${constants.run_current_xy}
+#driver_TBL: ${constants.driver_tbl_xy}
+#driver_TOFF: ${constants.driver_toff_xy}
+#driver_HSTRT: ${constants.driver_hsrt_xy}
+#driver_HEND: ${constants.driver_hend_xy}
+driver_SGT: ${constants.driver_sgt_xy}
+
+[tmc5160 stepper_y1]
+spi_speed: 500000
+spi_software_sclk_pin: PE12
+spi_software_mosi_pin: PE14
+spi_software_miso_pin: PE13
+cs_pin: PG11
+sense_resistor: 0.075
+diag1_pin: ^!PF3
+home_current: 1
+current_change_dwell_time: ${constants.dwell_time_xy}
+interpolate: ${constants.interpolate_xy}
+run_current: ${constants.run_current_xy}
+#driver_TBL: ${constants.driver_tbl_xy}
+#driver_TOFF: ${constants.driver_toff_xy}
+#driver_HSTRT: ${constants.driver_hsrt_xy}
+#driver_HEND: ${constants.driver_hend_xy}
+driver_SGT: ${constants.driver_sgt_xy}
+
+#####################################################################
+# 	Z Stepper Settings
+#####################################################################
+
+[stepper_z]
+# connected to Motor 5
+step_pin: PB5
+dir_pin: PB4
+enable_pin: !PB6
+full_steps_per_rotation: 200
+rotation_distance: 40
+microsteps: 32
+gear_ratio: 5:1
+endstop_pin: probe:z_virtual_endstop
+position_max: 185
+position_min: -2
+homing_speed: 25
+homing_retract_dist: 0
+
+[stepper_z1]
+# connected to MOTOR 6
+step_pin: PG15
+dir_pin: !PB3
+enable_pin: !PD5
+full_steps_per_rotation: 200
+microsteps: 32
+rotation_distance: 40
+gear_ratio: 5:1
+
+[stepper_z2]
+# connected to Motor 7
+step_pin: PD3
+dir_pin: !PD2
+enable_pin: !PD4
+full_steps_per_rotation: 200
+microsteps: 32
+rotation_distance: 40
+gear_ratio: 5:1
+
+# TMC Stepper Driver Settings
+
+
+[tmc2209 stepper_z]
+uart_pin: PG10
+sense_resistor: 0.110
+stealthchop_threshold: ${constants.stealthchop_z}
+interpolate: ${constants.interpolate_z}
+run_current: ${constants.run_current_z}
+driver_TBL: ${constants.driver_tbl_z}
+driver_TOFF: ${constants.driver_toff_z}
+driver_HSTRT: ${constants.driver_hsrt_z}
+driver_HEND: ${constants.driver_hend_z}
+
+[tmc2209 stepper_z1]
+uart_pin: PG9
+sense_resistor: 0.110
+stealthchop_threshold: ${constants.stealthchop_z}
+interpolate: ${constants.interpolate_z}
+run_current: ${constants.run_current_z}
+driver_TBL: ${constants.driver_tbl_z}
+driver_TOFF: ${constants.driver_toff_z}
+driver_HSTRT: ${constants.driver_hsrt_z}
+driver_HEND: ${constants.driver_hend_z}
+
+[tmc2209 stepper_z2]
+uart_pin: PD7
+sense_resistor: 0.110
+stealthchop_threshold: ${constants.stealthchop_z}
+interpolate: ${constants.interpolate_z}
+run_current: ${constants.run_current_z}
+driver_TBL: ${constants.driver_tbl_z}
+driver_TOFF: ${constants.driver_toff_z}
+driver_HSTRT: ${constants.driver_hsrt_z}
+driver_HEND: ${constants.driver_hend_z}

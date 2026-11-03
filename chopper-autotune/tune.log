@@ -1,0 +1,823 @@
+=== Motor A ===
+Driver tmc5160 on stepper_x (motor A), accelerometer beacon, kinematics cartesian, registers {'tbl': 2, 'toff': 3, 'hstrt': 5, 'hend': 2, 'tpfd': 4}
+Motor A is a rail of 2 TMC5160 drivers (stepper_x, stepper_x1): one G1 of the head moves them together along X; speeds and accels in belt mm, as on one motor
+  head: F1200-7200 for 20-120 mm/s of belt, M204 S2500 for 2500 mm/s2 of belt
+  max_velocity 1200 caps the belt at 1200 mm/s
+  a curve still rising at the top extends the scan up to 354 mm/s
+  moves through the bed center, the longest from X22.6 Y92.2 to X148.4 Y92.2 (G-code coordinates); nearest a bed edge 31.6 mm, at 120 mm/s (kept: X 25, Y 25 mm)
+  for the moves: minimum_cruise_ratio 0 -> 0, input shaper (by config X 80 Hz, Y 89.8 Hz) -> off (every homing runs on your own settings)
+  stepper_x: registers tbl2_toff3_hstrt5_hend2_tpfd4, spreadCycle; run_current 1.8 A; its own enable pin
+  stepper_x1: registers tbl2_toff3_hstrt5_hend2_tpfd4, spreadCycle; run_current 1.8 A; its own enable pin
+Every X/Y motor holds under current the whole run: stepper_x its run_current 1.8 A, stepper_x1 its run_current 1.8 A, stepper_y its run_current 1.8 A, stepper_y1 its run_current 1.8 A
+WARNING: stepper_x, stepper_x1, stepper_y, stepper_y1 stay at their full run_current the whole run, the waiting ones too, so a waiting driver heats like a moving one: cool the drivers (#133). Klipper advises against a hold_current below run_current: a change of current can move a motor
+Plan: 51 speeds (20..120 step 2) -> 102 moves, capture stream, ETA 2m 18s
+Preparing: home XY and go to the center; every X/Y motor stays on until the run ends
+Baseline noise: median magnitude 333.5
+Scanning with Klipper default registers tbl2_toff3_hstrt5_hend2_tpfd4 — the current tuning would mask the peaks
+[1/51] 20 mm/s: median 3316.5
+[2/51] 22 mm/s: median 2886.7
+[3/51] 24 mm/s: median 3766.9
+[4/51] 26 mm/s: median 7284.9
+[5/51] 28 mm/s: median 9933.4
+[6/51] 30 mm/s: median 9410.1
+[7/51] 32 mm/s: median 12272.3
+[8/51] 34 mm/s: median 10062.8
+[9/51] 36 mm/s: median 6496.5
+[10/51] 38 mm/s: median 5379.2
+[11/51] 40 mm/s: median 5355.8
+[12/51] 42 mm/s: median 6608.0
+[13/51] 44 mm/s: median 5764.0
+[14/51] 46 mm/s: median 9500.7
+[15/51] 48 mm/s: median 6112.8
+[16/51] 50 mm/s: median 9880.4
+[17/51] 52 mm/s: median 13245.0
+[18/51] 54 mm/s: median 9240.9
+[19/51] 56 mm/s: median 6694.0
+[20/51] 58 mm/s: median 4858.6
+[21/51] 60 mm/s: median 3889.2
+[22/51] 62 mm/s: median 3582.6
+[23/51] 64 mm/s: median 4645.0
+[24/51] 66 mm/s: median 3836.2
+[25/51] 68 mm/s: median 4607.6
+[26/51] 70 mm/s: median 3517.4
+[27/51] 72 mm/s: median 3674.9
+[28/51] 74 mm/s: median 3422.6
+[29/51] 76 mm/s: median 2945.1
+[30/51] 78 mm/s: median 2765.4
+[31/51] 80 mm/s: median 2358.0
+[32/51] 82 mm/s: median 2567.6
+[33/51] 84 mm/s: median 2877.1
+[34/51] 86 mm/s: median 2984.1
+[35/51] 88 mm/s: median 3014.1
+[36/51] 90 mm/s: median 3456.6
+[37/51] 92 mm/s: median 4784.0
+[38/51] 94 mm/s: median 5451.2
+[39/51] 96 mm/s: median 4619.2
+[40/51] 98 mm/s: median 4287.7
+[41/51] 100 mm/s: median 4460.1
+[42/51] 102 mm/s: median 4235.9
+[43/51] 104 mm/s: median 4843.4
+[44/51] 106 mm/s: median 5051.1
+[45/51] 108 mm/s: median 4298.2
+[46/51] 110 mm/s: median 4846.5
+[47/51] 112 mm/s: median 4560.4
+[48/51] 114 mm/s: median 4090.9
+[49/51] 116 mm/s: median 4747.8
+[50/51] 118 mm/s: median 4064.3
+[51/51] 120 mm/s: median 4494.9
+Restoring registers, homing
+Done in 3m: report /home/reapola/printer_data/config/chopper-autotune/datasets/20261103_085817_speed_x/report.html
+Resonance peaks: 32 mm/s (magnitude 12272), 52 mm/s (magnitude 13245)
+Driver tmc5160 on stepper_x (motor A), accelerometer beacon, kinematics cartesian, baseline {'tbl': 2, 'toff': 3, 'hstrt': 5, 'hend': 2, 'tpfd': 4}
+Motor A is a rail of 2 TMC5160 drivers (stepper_x, stepper_x1): one G1 of the head moves them together along X; speeds and accels in belt mm, as on one motor
+  head: F1920 for 32 mm/s of belt, M204 S2500 for 2500 mm/s2 of belt
+  max_velocity 1200 caps the belt at 1200 mm/s
+  moves through the bed center, the longest from X65.3 Y92.2 to X105.7 Y92.2 (G-code coordinates); nearest a bed edge 74.3 mm, at 32 mm/s (kept: X 25, Y 25 mm)
+  for the moves: minimum_cruise_ratio 0 -> 0, input shaper (by config X 80 Hz, Y 89.8 Hz) -> off (every homing runs on your own settings)
+  stepper_x: registers tbl2_toff3_hstrt5_hend2_tpfd4, spreadCycle; run_current 1.8 A; its own enable pin
+  stepper_x1: registers tbl2_toff3_hstrt5_hend2_tpfd4, spreadCycle; run_current 1.8 A; its own enable pin
+Every X/Y motor holds under current the whole run: stepper_x its run_current 1.8 A, stepper_x1 its run_current 1.8 A, stepper_y its run_current 1.8 A, stepper_y1 its run_current 1.8 A
+WARNING: stepper_x, stepper_x1, stepper_y, stepper_y1 stay at their full run_current the whole run, the waiting ones too, so a waiting driver heats like a moving one: cool the drivers (#133). Klipper advises against a hold_current below run_current: a change of current can move a motor
+Plan: multi-start coordinate descent, up to 298 candidates -> up to 660 moves of 40.4mm, capture stream, ETA under 0:17
+Registers the run tries: TBL=1:3 TOFF=1:8 HSTRT=0:7 HEND=0:15 TPFD=0:15 MAX_HYSTERESIS=15
+Preparing: home XY and go to the center; every X/Y motor stays on until the run ends
+Baseline noise: median magnitude 978.4
+  tbl2_toff3_hstrt5_hend2_tpfd4 -> 13057.8
+  tbl1_toff2_hstrt5_hend2_tpfd4 -> 8533.0
+  tbl1_toff3_hstrt5_hend2_tpfd4 -> 10706.3
+  tbl1_toff4_hstrt5_hend2_tpfd4 -> 11534.8
+  tbl1_toff5_hstrt5_hend2_tpfd4 -> 14777.0 audible
+  tbl1_toff6_hstrt5_hend2_tpfd4 -> 14623.4 audible
+  tbl1_toff7_hstrt5_hend2_tpfd4 -> 16054.1 audible
+  tbl1_toff8_hstrt5_hend2_tpfd4 -> 18603.6 audible
+  tbl2_toff1_hstrt5_hend2_tpfd4 -> 8987.7
+  tbl2_toff2_hstrt5_hend2_tpfd4 -> 10832.0
+  tbl2_toff4_hstrt5_hend2_tpfd4 -> 13677.4
+  tbl2_toff5_hstrt5_hend2_tpfd4 -> 18495.0 audible
+  tbl2_toff6_hstrt5_hend2_tpfd4 -> 21312.1 audible
+  tbl2_toff7_hstrt5_hend2_tpfd4 -> 22067.9 audible
+  tbl2_toff8_hstrt5_hend2_tpfd4 -> 21185.5 audible
+  tbl3_toff1_hstrt5_hend2_tpfd4 -> 11810.9
+  tbl3_toff2_hstrt5_hend2_tpfd4 -> 15229.1
+  tbl3_toff3_hstrt5_hend2_tpfd4 -> 17289.6
+  tbl3_toff4_hstrt5_hend2_tpfd4 -> 20749.2 audible
+  tbl3_toff5_hstrt5_hend2_tpfd4 -> 23747.6 audible
+  tbl3_toff6_hstrt5_hend2_tpfd4 -> 20609.0 audible
+  tbl3_toff7_hstrt5_hend2_tpfd4 -> 22802.6 audible
+  tbl3_toff8_hstrt5_hend2_tpfd4 -> 23541.8 audible
+  tbl1_toff2_hstrt0_hend2_tpfd4 -> 10968.5
+  tbl1_toff2_hstrt1_hend2_tpfd4 -> 10525.7
+  tbl1_toff2_hstrt2_hend2_tpfd4 -> 10200.3
+  tbl1_toff2_hstrt3_hend2_tpfd4 -> 9769.2
+  tbl1_toff2_hstrt4_hend2_tpfd4 -> 9439.9
+  tbl1_toff2_hstrt6_hend2_tpfd4 -> 9518.2
+  tbl1_toff2_hstrt7_hend2_tpfd4 -> 9216.1
+  tbl1_toff2_hstrt5_hend0_tpfd4 -> 9547.8
+  tbl1_toff2_hstrt5_hend1_tpfd4 -> 9407.0
+  tbl1_toff2_hstrt5_hend3_tpfd4 -> 9655.8
+  tbl1_toff2_hstrt5_hend4_tpfd4 -> 9357.1
+  tbl1_toff2_hstrt5_hend5_tpfd4 -> 9305.3
+  tbl1_toff2_hstrt5_hend6_tpfd4 -> 8961.9
+  tbl1_toff2_hstrt5_hend7_tpfd4 -> 9318.0
+  tbl1_toff2_hstrt5_hend8_tpfd4 -> 9525.6
+  tbl1_toff2_hstrt5_hend9_tpfd4 -> 9544.9
+  tbl1_toff2_hstrt5_hend10_tpfd4 -> 9895.2
+  tbl1_toff2_hstrt5_hend11_tpfd4 -> 9764.9
+  tbl1_toff2_hstrt5_hend12_tpfd4 -> 10817.5
+  tbl1_toff2_hstrt5_hend2_tpfd0 -> 9054.4
+  tbl1_toff2_hstrt5_hend2_tpfd1 -> 8845.9
+  tbl1_toff2_hstrt5_hend2_tpfd2 -> 9632.5
+  tbl1_toff2_hstrt5_hend2_tpfd3 -> 8950.4
+  tbl1_toff2_hstrt5_hend2_tpfd5 -> 9120.4
+  tbl1_toff2_hstrt5_hend2_tpfd6 -> 9519.4
+  tbl1_toff2_hstrt5_hend2_tpfd7 -> 9437.3
+  tbl1_toff2_hstrt5_hend2_tpfd8 -> 9381.3
+  tbl1_toff2_hstrt5_hend2_tpfd9 -> 9735.3
+  tbl1_toff2_hstrt5_hend2_tpfd10 -> 9195.6
+  tbl1_toff2_hstrt5_hend2_tpfd11 -> 9661.2
+  tbl1_toff2_hstrt5_hend2_tpfd12 -> 9171.1
+  tbl1_toff2_hstrt5_hend2_tpfd13 -> 9918.3
+  tbl1_toff2_hstrt5_hend2_tpfd14 -> 9076.8
+  tbl1_toff2_hstrt5_hend2_tpfd15 -> 9967.6
+  tbl1_toff2_hstrt3_hend0_tpfd4 -> 11080.8
+  tbl1_toff3_hstrt3_hend0_tpfd4 -> 12708.8
+  tbl1_toff4_hstrt3_hend0_tpfd4 -> 14145.0
+  tbl1_toff5_hstrt3_hend0_tpfd4 -> 18948.8 audible
+  tbl1_toff6_hstrt3_hend0_tpfd4 -> 18059.4 audible
+  tbl1_toff7_hstrt3_hend0_tpfd4 -> 19051.3 audible
+  tbl1_toff8_hstrt3_hend0_tpfd4 -> 21975.3 audible
+  tbl2_toff1_hstrt3_hend0_tpfd4 -> 10924.9
+  tbl2_toff2_hstrt3_hend0_tpfd4 -> 13994.7
+  tbl2_toff3_hstrt3_hend0_tpfd4 -> 15619.1
+  tbl2_toff4_hstrt3_hend0_tpfd4 -> 18063.0
+  tbl2_toff5_hstrt3_hend0_tpfd4 -> 22089.3 audible
+  tbl2_toff6_hstrt3_hend0_tpfd4 -> 25032.4 audible
+  tbl2_toff7_hstrt3_hend0_tpfd4 -> 23537.0 audible
+  tbl2_toff8_hstrt3_hend0_tpfd4 -> 25983.2 audible
+  tbl3_toff1_hstrt3_hend0_tpfd4 -> 14234.9
+  tbl3_toff2_hstrt3_hend0_tpfd4 -> 17172.9
+  tbl3_toff3_hstrt3_hend0_tpfd4 -> 20119.2
+  tbl3_toff4_hstrt3_hend0_tpfd4 -> 25329.0 audible
+  tbl3_toff5_hstrt3_hend0_tpfd4 -> 26635.6 audible
+  tbl3_toff6_hstrt3_hend0_tpfd4 -> 23778.1 audible
+  tbl3_toff7_hstrt3_hend0_tpfd4 -> 27744.7 audible
+  tbl3_toff8_hstrt3_hend0_tpfd4 -> 26833.0 audible
+  tbl2_toff1_hstrt0_hend0_tpfd4 -> 12224.2
+  tbl2_toff1_hstrt1_hend0_tpfd4 -> 11812.1
+  tbl2_toff1_hstrt2_hend0_tpfd4 -> 11268.2
+  tbl2_toff1_hstrt4_hend0_tpfd4 -> 10675.0
+  tbl2_toff1_hstrt5_hend0_tpfd4 -> 9969.2
+  tbl2_toff1_hstrt6_hend0_tpfd4 -> 9635.5
+  tbl2_toff1_hstrt7_hend0_tpfd4 -> 9099.3
+  tbl2_toff1_hstrt7_hend1_tpfd4 -> 8795.6
+  tbl2_toff1_hstrt7_hend2_tpfd4 -> 8376.0
+  tbl2_toff1_hstrt7_hend3_tpfd4 -> 8154.7
+  tbl2_toff1_hstrt7_hend4_tpfd4 -> 8264.5
+  tbl2_toff1_hstrt7_hend5_tpfd4 -> 8366.9
+  tbl2_toff1_hstrt7_hend6_tpfd4 -> 8490.0
+  tbl2_toff1_hstrt7_hend7_tpfd4 -> 8813.6
+  tbl2_toff1_hstrt7_hend8_tpfd4 -> 8585.1
+  tbl2_toff1_hstrt7_hend9_tpfd4 -> 8639.2
+  tbl2_toff1_hstrt7_hend10_tpfd4 -> 8822.0
+  tbl1_toff2_hstrt7_hend3_tpfd4 -> 9276.9
+  tbl1_toff3_hstrt7_hend3_tpfd4 -> 10164.3
+  tbl1_toff4_hstrt7_hend3_tpfd4 -> 11545.9
+  tbl1_toff5_hstrt7_hend3_tpfd4 -> 14196.1 audible
+  tbl1_toff6_hstrt7_hend3_tpfd4 -> 13297.0 audible
+  tbl1_toff7_hstrt7_hend3_tpfd4 -> 14253.8 audible
+  tbl1_toff8_hstrt7_hend3_tpfd4 -> 16293.4 audible
+  tbl2_toff2_hstrt7_hend3_tpfd4 -> 10200.1
+  tbl2_toff3_hstrt7_hend3_tpfd4 -> 11524.7
+  tbl2_toff4_hstrt7_hend3_tpfd4 -> 12837.0
+  tbl2_toff5_hstrt7_hend3_tpfd4 -> 17611.8 audible
+  tbl2_toff6_hstrt7_hend3_tpfd4 -> 19022.4 audible
+  tbl2_toff7_hstrt7_hend3_tpfd4 -> 19459.3 audible
+  tbl2_toff8_hstrt7_hend3_tpfd4 -> 19510.2 audible
+  tbl3_toff1_hstrt7_hend3_tpfd4 -> 10618.6
+  tbl3_toff2_hstrt7_hend3_tpfd4 -> 13075.3
+  tbl3_toff3_hstrt7_hend3_tpfd4 -> 14722.6
+  tbl3_toff4_hstrt7_hend3_tpfd4 -> 18692.7 audible
+  tbl3_toff5_hstrt7_hend3_tpfd4 -> 22387.2 audible
+  tbl3_toff6_hstrt7_hend3_tpfd4 -> 22366.5 audible
+  tbl3_toff7_hstrt7_hend3_tpfd4 -> 22152.1 audible
+  tbl3_toff8_hstrt7_hend3_tpfd4 -> 24655.2 audible
+  tbl2_toff1_hstrt0_hend3_tpfd4 -> 11787.3
+  tbl2_toff1_hstrt1_hend3_tpfd4 -> 11165.1
+  tbl2_toff1_hstrt2_hend3_tpfd4 -> 10569.0
+  tbl2_toff1_hstrt3_hend3_tpfd4 -> 10224.4
+  tbl2_toff1_hstrt4_hend3_tpfd4 -> 9504.6
+  tbl2_toff1_hstrt5_hend3_tpfd4 -> 8919.0
+  tbl2_toff1_hstrt6_hend3_tpfd4 -> 8448.0
+  tbl2_toff1_hstrt7_hend3_tpfd0 -> 8535.1
+  tbl2_toff1_hstrt7_hend3_tpfd1 -> 8286.8
+  tbl2_toff1_hstrt7_hend3_tpfd2 -> 8275.1
+  tbl2_toff1_hstrt7_hend3_tpfd3 -> 8651.9
+  tbl2_toff1_hstrt7_hend3_tpfd5 -> 8192.4
+  tbl2_toff1_hstrt7_hend3_tpfd6 -> 8511.8
+  tbl2_toff1_hstrt7_hend3_tpfd7 -> 8268.3
+  tbl2_toff1_hstrt7_hend3_tpfd8 -> 8311.0
+  tbl2_toff1_hstrt7_hend3_tpfd9 -> 8545.2
+  tbl2_toff1_hstrt7_hend3_tpfd10 -> 8308.8
+  tbl2_toff1_hstrt7_hend3_tpfd11 -> 8307.0
+  tbl2_toff1_hstrt7_hend3_tpfd12 -> 8359.9
+  tbl2_toff1_hstrt7_hend3_tpfd13 -> 8460.0
+  tbl2_toff1_hstrt7_hend3_tpfd14 -> 8623.2
+  tbl2_toff1_hstrt7_hend3_tpfd15 -> 8547.7
+  tbl1_toff2_hstrt3_hend7_tpfd4 -> 9912.5
+  tbl1_toff3_hstrt3_hend7_tpfd4 -> 11150.2
+  tbl1_toff4_hstrt3_hend7_tpfd4 -> 12356.0
+  tbl1_toff5_hstrt3_hend7_tpfd4 -> 16000.8 audible
+  tbl1_toff6_hstrt3_hend7_tpfd4 -> 15017.6 audible
+  tbl1_toff7_hstrt3_hend7_tpfd4 -> 17199.0 audible
+  tbl1_toff8_hstrt3_hend7_tpfd4 -> 18076.3 audible
+  tbl2_toff1_hstrt3_hend7_tpfd4 -> 8946.1
+  tbl2_toff2_hstrt3_hend7_tpfd4 -> 10402.0
+  tbl2_toff3_hstrt3_hend7_tpfd4 -> 12502.3
+  tbl2_toff4_hstrt3_hend7_tpfd4 -> 14240.8
+  tbl2_toff5_hstrt3_hend7_tpfd4 -> 19016.9 audible
+  tbl2_toff6_hstrt3_hend7_tpfd4 -> 19765.3 audible
+  tbl2_toff7_hstrt3_hend7_tpfd4 -> 21496.9 audible
+  tbl2_toff8_hstrt3_hend7_tpfd4 -> 20643.6 audible
+  tbl3_toff1_hstrt3_hend7_tpfd4 -> 11330.1
+  tbl3_toff2_hstrt3_hend7_tpfd4 -> 14198.9
+  tbl3_toff3_hstrt3_hend7_tpfd4 -> 15030.0
+  tbl3_toff4_hstrt3_hend7_tpfd4 -> 19074.0 audible
+  tbl3_toff5_hstrt3_hend7_tpfd4 -> 22885.3 audible
+  tbl3_toff6_hstrt3_hend7_tpfd4 -> 23081.1 audible
+  tbl3_toff7_hstrt3_hend7_tpfd4 -> 22569.0 audible
+  tbl3_toff8_hstrt3_hend7_tpfd4 -> 26349.2 audible
+  tbl2_toff1_hstrt0_hend7_tpfd4 -> 9790.0
+  tbl2_toff1_hstrt1_hend7_tpfd4 -> 9519.2
+  tbl2_toff1_hstrt2_hend7_tpfd4 -> 9054.2
+  tbl2_toff1_hstrt4_hend7_tpfd4 -> 8971.6
+  tbl2_toff1_hstrt5_hend7_tpfd4 -> 8699.7
+  tbl2_toff1_hstrt6_hend7_tpfd4 -> 8571.9
+  tbl2_toff1_hstrt6_hend1_tpfd4 -> 9327.6
+  tbl2_toff1_hstrt6_hend2_tpfd4 -> 8977.9
+  tbl2_toff1_hstrt6_hend4_tpfd4 -> 8616.8
+  tbl2_toff1_hstrt6_hend5_tpfd4 -> 8653.2
+  tbl2_toff1_hstrt6_hend6_tpfd4 -> 8638.6
+  tbl2_toff1_hstrt6_hend8_tpfd4 -> 8770.6
+  tbl2_toff1_hstrt6_hend9_tpfd4 -> 8924.4
+  tbl2_toff1_hstrt6_hend10_tpfd4 -> 8981.4
+  tbl2_toff1_hstrt6_hend11_tpfd4 -> 9061.6
+  tbl1_toff2_hstrt6_hend3_tpfd4 -> 9589.1
+  tbl1_toff3_hstrt6_hend3_tpfd4 -> 11134.6
+  tbl1_toff4_hstrt6_hend3_tpfd4 -> 12181.5
+  tbl1_toff5_hstrt6_hend3_tpfd4 -> 15875.9 audible
+  tbl1_toff6_hstrt6_hend3_tpfd4 -> 14897.5 audible
+  tbl1_toff7_hstrt6_hend3_tpfd4 -> 16826.6 audible
+  tbl1_toff8_hstrt6_hend3_tpfd4 -> 18218.4 audible
+  tbl2_toff2_hstrt6_hend3_tpfd4 -> 10345.6
+  tbl2_toff3_hstrt6_hend3_tpfd4 -> 12713.3
+  tbl2_toff4_hstrt6_hend3_tpfd4 -> 14458.5
+  tbl2_toff5_hstrt6_hend3_tpfd4 -> 19055.9 audible
+  tbl2_toff6_hstrt6_hend3_tpfd4 -> 20394.4 audible
+  tbl2_toff7_hstrt6_hend3_tpfd4 -> 21441.7 audible
+  tbl2_toff8_hstrt6_hend3_tpfd4 -> 21240.1 audible
+  tbl3_toff1_hstrt6_hend3_tpfd4 -> 11674.5
+  tbl3_toff2_hstrt6_hend3_tpfd4 -> 14896.3
+  tbl3_toff3_hstrt6_hend3_tpfd4 -> 15589.9
+  tbl3_toff4_hstrt6_hend3_tpfd4 -> 19461.6 audible
+  tbl3_toff5_hstrt6_hend3_tpfd4 -> 23510.8 audible
+  tbl3_toff6_hstrt6_hend3_tpfd4 -> 23153.8 audible
+  tbl3_toff7_hstrt6_hend3_tpfd4 -> 23788.7 audible
+  tbl3_toff8_hstrt6_hend3_tpfd4 -> 26796.1 audible
+  tbl1_toff2_hstrt2_hend15_tpfd4 -> 11529.6
+  tbl1_toff3_hstrt2_hend15_tpfd4 -> 12445.7
+  tbl1_toff4_hstrt2_hend15_tpfd4 -> 13253.3
+  tbl1_toff5_hstrt2_hend15_tpfd4 -> 17282.6 audible
+  tbl1_toff6_hstrt2_hend15_tpfd4 -> 15206.6 audible
+  tbl1_toff7_hstrt2_hend15_tpfd4 -> 16988.7 audible
+  tbl1_toff8_hstrt2_hend15_tpfd4 -> 18250.1 audible
+  tbl2_toff1_hstrt2_hend15_tpfd4 -> 10449.5
+  tbl2_toff2_hstrt2_hend15_tpfd4 -> 11027.0
+  tbl2_toff3_hstrt2_hend15_tpfd4 -> 12643.9
+  tbl2_toff4_hstrt2_hend15_tpfd4 -> 12549.4
+  tbl2_toff5_hstrt2_hend15_tpfd4 -> 16562.0 audible
+  tbl2_toff6_hstrt2_hend15_tpfd4 -> 15746.4 audible
+  tbl2_toff7_hstrt2_hend15_tpfd4 -> 16779.7 audible
+  tbl2_toff8_hstrt2_hend15_tpfd4 -> 18591.8 audible
+  tbl3_toff1_hstrt2_hend15_tpfd4 -> 11222.6
+  tbl3_toff2_hstrt2_hend15_tpfd4 -> 12922.7
+  tbl3_toff3_hstrt2_hend15_tpfd4 -> 14667.8
+  tbl3_toff4_hstrt2_hend15_tpfd4 -> 18665.2 audible
+  tbl3_toff5_hstrt2_hend15_tpfd4 -> 18008.9 audible
+  tbl3_toff6_hstrt2_hend15_tpfd4 -> 19678.6 audible
+  tbl3_toff7_hstrt2_hend15_tpfd4 -> 21628.6 audible
+  tbl3_toff8_hstrt2_hend15_tpfd4 -> 22149.3 audible
+  tbl2_toff1_hstrt0_hend15_tpfd4 -> 10176.0
+  tbl2_toff1_hstrt1_hend15_tpfd4 -> 10028.4
+  tbl2_toff1_hstrt1_hend1_tpfd4 -> 12357.1
+  tbl2_toff1_hstrt1_hend2_tpfd4 -> 11697.9
+  tbl2_toff1_hstrt1_hend4_tpfd4 -> 10659.8
+  tbl2_toff1_hstrt1_hend5_tpfd4 -> 10705.6
+  tbl2_toff1_hstrt1_hend6_tpfd4 -> 10234.3
+  tbl2_toff1_hstrt1_hend8_tpfd4 -> 9817.1
+  tbl2_toff1_hstrt1_hend9_tpfd4 -> 9269.4
+  tbl2_toff1_hstrt1_hend10_tpfd4 -> 9664.3
+  tbl2_toff1_hstrt1_hend11_tpfd4 -> 9177.6
+  tbl2_toff1_hstrt1_hend12_tpfd4 -> 9227.5
+  tbl2_toff1_hstrt1_hend13_tpfd4 -> 9524.7
+  tbl2_toff1_hstrt1_hend14_tpfd4 -> 9179.5
+  tbl1_toff2_hstrt1_hend11_tpfd4 -> 10500.3
+  tbl1_toff3_hstrt1_hend11_tpfd4 -> 11267.9
+  tbl1_toff4_hstrt1_hend11_tpfd4 -> 11635.0
+  tbl1_toff5_hstrt1_hend11_tpfd4 -> 16702.2 audible
+  tbl1_toff6_hstrt1_hend11_tpfd4 -> 13673.7 audible
+  tbl1_toff7_hstrt1_hend11_tpfd4 -> 16843.8 audible
+  tbl1_toff8_hstrt1_hend11_tpfd4 -> 17453.7 audible
+  tbl2_toff2_hstrt1_hend11_tpfd4 -> 11607.3
+  tbl2_toff3_hstrt1_hend11_tpfd4 -> 12180.1
+  tbl2_toff4_hstrt1_hend11_tpfd4 -> 14262.8
+  tbl2_toff5_hstrt1_hend11_tpfd4 -> 17209.6 audible
+  tbl2_toff6_hstrt1_hend11_tpfd4 -> 16387.9 audible
+  tbl2_toff7_hstrt1_hend11_tpfd4 -> 18152.2 audible
+  tbl2_toff8_hstrt1_hend11_tpfd4 -> 19073.4 audible
+  tbl3_toff1_hstrt1_hend11_tpfd4 -> 11191.9
+  tbl3_toff2_hstrt1_hend11_tpfd4 -> 13979.4
+  tbl3_toff3_hstrt1_hend11_tpfd4 -> 15361.9
+  tbl3_toff4_hstrt1_hend11_tpfd4 -> 20030.9 audible
+  tbl3_toff5_hstrt1_hend11_tpfd4 -> 20808.0 audible
+  tbl3_toff6_hstrt1_hend11_tpfd4 -> 21917.4 audible
+  tbl3_toff7_hstrt1_hend11_tpfd4 -> 22808.5 audible
+  tbl3_toff8_hstrt1_hend11_tpfd4 -> 24204.4 audible
+  tbl2_toff1_hstrt0_hend11_tpfd4 -> 9553.4
+  tbl2_toff1_hstrt2_hend11_tpfd4 -> 9532.0
+  tbl2_toff1_hstrt3_hend11_tpfd4 -> 9534.8
+  tbl2_toff1_hstrt4_hend11_tpfd4 -> 9707.0
+  tbl2_toff1_hstrt5_hend11_tpfd4 -> 9858.3
+  tbl2_toff1_hstrt6_hend3_tpfd0 -> 9599.4
+  tbl2_toff1_hstrt6_hend3_tpfd1 -> 9433.2
+  tbl2_toff1_hstrt6_hend3_tpfd2 -> 9103.5
+  tbl2_toff1_hstrt6_hend3_tpfd3 -> 9069.9
+  tbl2_toff1_hstrt6_hend3_tpfd5 -> 9271.3
+  tbl2_toff1_hstrt6_hend3_tpfd6 -> 9107.3
+  tbl2_toff1_hstrt6_hend3_tpfd7 -> 9437.3
+  tbl2_toff1_hstrt6_hend3_tpfd8 -> 9346.2
+  tbl2_toff1_hstrt6_hend3_tpfd9 -> 9225.9
+  tbl2_toff1_hstrt6_hend3_tpfd10 -> 9495.2
+  tbl2_toff1_hstrt6_hend3_tpfd11 -> 9443.7
+  tbl2_toff1_hstrt6_hend3_tpfd12 -> 9589.0
+  tbl2_toff1_hstrt6_hend3_tpfd13 -> 9679.6
+  tbl2_toff1_hstrt6_hend3_tpfd14 -> 9540.8
+  tbl2_toff1_hstrt6_hend3_tpfd15 -> 9991.6
+Descent best tbl2_toff1_hstrt7_hend3_tpfd4
+Validating 3 candidate(s) with 2 extra iterations each
+Validating 3 candidate(s) with 2 extra iterations each
+Validating 3 candidate(s) with 2 extra iterations each
+Validating 3 candidate(s) with 2 extra iterations each
+Measuring tbl2_toff1_hstrt7_hend3_tpfd4 / tbl2_toff3_hstrt5_hend2_tpfd4 back to back, 4 rounds: the gain is counted on these moves
+
+rank  tbl  toff  hstrt  hend  tpfd  magnitude   spread   n clicks   f_chop 
+1       2     1      6     3     4     8267.1    965.7   2      0  65.2kHz 
+2       2     1      7     3    13     8253.6   1208.2   2      0  65.2kHz 
+3       2     1      7     6     4     8207.9    285.5   2      0  65.2kHz 
+4       2     1      7     3     6     8304.2    588.9   2      0  65.2kHz 
+5       1     2      5     2     4     8401.7    524.9   2      0  53.6kHz 
+6       2     1      7     3     0     8326.9    110.2   2      0  65.2kHz 
+7       2     1      7     3     9     8336.8    755.2   2      0  65.2kHz 
+8       2     1      7     3    15     8339.2   1271.0   2      0  65.2kHz 
+9       2     1      6     7     4     8287.0    729.4   2      0  65.2kHz 
+10      2     1      7     8     4     8249.9    939.4   2      0  65.2kHz 
+31      2     1      7     3     4     8667.1   1115.6  14      0  65.2kHz 
+
+vs Klipper defaults tbl2_toff3_hstrt5_hend2_tpfd4, back to back: 1.49x less vibration, lower in each of 4 rounds (13129 -> 8826)
+
+Recommended for printer.cfg:
+
+[tmc5160 stepper_x]
+driver_TBL: 2
+driver_TOFF: 1
+driver_HSTRT: 7
+driver_HEND: 3
+driver_TPFD: 4
+
+[tmc5160 stepper_x1]
+driver_TBL: 2
+driver_TOFF: 1
+driver_HSTRT: 7
+driver_HEND: 3
+driver_TPFD: 4
+Restoring baseline registers, homing
+Done in 33m: 624 ok, 0 failed -> /home/reapola/printer_data/config/chopper-autotune/datasets/20261103_090157_x
+=== Motor B ===
+Driver tmc5160 on stepper_y (motor B), accelerometer beacon, kinematics cartesian, registers {'tbl': 2, 'toff': 3, 'hstrt': 5, 'hend': 2, 'tpfd': 4}
+Motor B is a rail of 2 TMC5160 drivers (stepper_y, stepper_y1): one G1 of the head moves them together along Y; speeds and accels in belt mm, as on one motor
+  head: F1200-7200 for 20-120 mm/s of belt, M204 S2500 for 2500 mm/s2 of belt
+  max_velocity 1200 caps the belt at 1200 mm/s
+  a curve still rising at the top extends the scan up to 346 mm/s
+  moves through the bed center, the longest from X85.5 Y29.4 to X85.5 Y155.1 (G-code coordinates); nearest a bed edge 29.4 mm, at 120 mm/s (kept: X 25, Y 25 mm)
+  for the moves: minimum_cruise_ratio 0 -> 0, input shaper (by config X 80 Hz, Y 89.8 Hz) -> off (every homing runs on your own settings)
+  stepper_y: registers tbl2_toff3_hstrt5_hend2_tpfd4, spreadCycle; run_current 1.8 A; its own enable pin
+  stepper_y1: registers tbl2_toff3_hstrt5_hend2_tpfd4, spreadCycle; run_current 1.8 A; its own enable pin
+Every X/Y motor holds under current the whole run: stepper_x its run_current 1.8 A, stepper_x1 its run_current 1.8 A, stepper_y its run_current 1.8 A, stepper_y1 its run_current 1.8 A
+WARNING: stepper_x, stepper_x1, stepper_y, stepper_y1 stay at their full run_current the whole run, the waiting ones too, so a waiting driver heats like a moving one: cool the drivers (#133). Klipper advises against a hold_current below run_current: a change of current can move a motor
+Plan: 51 speeds (20..120 step 2) -> 102 moves, capture stream, ETA 2m 18s
+Preparing: home XY and go to the center; every X/Y motor stays on until the run ends
+Baseline noise: median magnitude 660.8
+Scanning with Klipper default registers tbl2_toff3_hstrt5_hend2_tpfd4 — the current tuning would mask the peaks
+[1/51] 20 mm/s: median 2429.2
+[2/51] 22 mm/s: median 3178.2
+[3/51] 24 mm/s: median 4081.0
+[4/51] 26 mm/s: median 7440.3
+[5/51] 28 mm/s: median 13492.7
+[6/51] 30 mm/s: median 10433.9
+[7/51] 32 mm/s: median 7406.3
+[8/51] 34 mm/s: median 4364.4
+[9/51] 36 mm/s: median 3377.4
+[10/51] 38 mm/s: median 3902.2
+[11/51] 40 mm/s: median 4335.8
+[12/51] 42 mm/s: median 4499.2
+[13/51] 44 mm/s: median 7295.0
+[14/51] 46 mm/s: median 12554.8
+[15/51] 48 mm/s: median 8543.0
+[16/51] 50 mm/s: median 9865.9
+[17/51] 52 mm/s: median 8828.1
+[18/51] 54 mm/s: median 8804.6
+[19/51] 56 mm/s: median 6761.6
+[20/51] 58 mm/s: median 5026.1
+[21/51] 60 mm/s: median 5746.8
+[22/51] 62 mm/s: median 4760.5
+[23/51] 64 mm/s: median 4202.7
+[24/51] 66 mm/s: median 3761.4
+[25/51] 68 mm/s: median 4328.8
+[26/51] 70 mm/s: median 4582.2
+[27/51] 72 mm/s: median 4742.6
+[28/51] 74 mm/s: median 4956.4
+[29/51] 76 mm/s: median 3980.3
+[30/51] 78 mm/s: median 3511.2
+[31/51] 80 mm/s: median 2984.1
+[32/51] 82 mm/s: median 2764.3
+[33/51] 84 mm/s: median 3259.6
+[34/51] 86 mm/s: median 3855.9
+[35/51] 88 mm/s: median 5582.8
+[36/51] 90 mm/s: median 6236.0
+[37/51] 92 mm/s: median 5728.8
+[38/51] 94 mm/s: median 5690.6
+[39/51] 96 mm/s: median 4428.6
+[40/51] 98 mm/s: median 4284.5
+[41/51] 100 mm/s: median 4397.1
+[42/51] 102 mm/s: median 4606.0
+[43/51] 104 mm/s: median 5525.6
+[44/51] 106 mm/s: median 5691.0
+[45/51] 108 mm/s: median 6973.1
+[46/51] 110 mm/s: median 8913.3
+[47/51] 112 mm/s: median 6220.4
+[48/51] 114 mm/s: median 6392.8
+[49/51] 116 mm/s: median 5958.2
+[50/51] 118 mm/s: median 5621.3
+[51/51] 120 mm/s: median 5186.0
+Restoring registers, homing
+Done in 3m: report /home/reapola/printer_data/config/chopper-autotune/datasets/20261103_093550_speed_y/report.html
+Resonance peaks: 28 mm/s (magnitude 13493), 48 mm/s (magnitude 8543), 92 mm/s (magnitude 5729), 110 mm/s (magnitude 8913)
+Driver tmc5160 on stepper_y (motor B), accelerometer beacon, kinematics cartesian, baseline {'tbl': 2, 'toff': 3, 'hstrt': 5, 'hend': 2, 'tpfd': 4}
+Motor B is a rail of 2 TMC5160 drivers (stepper_y, stepper_y1): one G1 of the head moves them together along Y; speeds and accels in belt mm, as on one motor
+  head: F1680 for 28 mm/s of belt, M204 S2500 for 2500 mm/s2 of belt
+  max_velocity 1200 caps the belt at 1200 mm/s
+  moves through the bed center, the longest from X85.5 Y74.6 to X85.5 Y109.9 (G-code coordinates); nearest a bed edge 74.6 mm, at 28 mm/s (kept: X 25, Y 25 mm)
+  for the moves: minimum_cruise_ratio 0 -> 0, input shaper (by config X 80 Hz, Y 89.8 Hz) -> off (every homing runs on your own settings)
+  stepper_y: registers tbl2_toff3_hstrt5_hend2_tpfd4, spreadCycle; run_current 1.8 A; its own enable pin
+  stepper_y1: registers tbl2_toff3_hstrt5_hend2_tpfd4, spreadCycle; run_current 1.8 A; its own enable pin
+Every X/Y motor holds under current the whole run: stepper_x its run_current 1.8 A, stepper_x1 its run_current 1.8 A, stepper_y its run_current 1.8 A, stepper_y1 its run_current 1.8 A
+WARNING: stepper_x, stepper_x1, stepper_y, stepper_y1 stay at their full run_current the whole run, the waiting ones too, so a waiting driver heats like a moving one: cool the drivers (#133). Klipper advises against a hold_current below run_current: a change of current can move a motor
+Plan: multi-start coordinate descent, up to 298 candidates -> up to 660 moves of 35.3mm, capture stream, ETA under 0:17
+Registers the run tries: TBL=1:3 TOFF=1:8 HSTRT=0:7 HEND=0:15 TPFD=0:15 MAX_HYSTERESIS=15
+Preparing: home XY and go to the center; every X/Y motor stays on until the run ends
+Baseline noise: median magnitude 1319.0
+Seeded from /home/reapola/printer_data/config/chopper-autotune/datasets/20261103_090157_x: starting at tbl2_toff1_hstrt6_hend3_tpfd4
+  tbl2_toff1_hstrt6_hend3_tpfd4 -> 13138.8
+  tbl1_toff2_hstrt6_hend3_tpfd4 -> 13107.2
+  tbl1_toff3_hstrt6_hend3_tpfd4 -> 14587.5
+  tbl1_toff4_hstrt6_hend3_tpfd4 -> 15655.9
+  tbl1_toff5_hstrt6_hend3_tpfd4 -> 19300.6 audible
+  tbl1_toff6_hstrt6_hend3_tpfd4 -> 19921.0 audible
+  tbl1_toff7_hstrt6_hend3_tpfd4 -> 20291.7 audible
+  tbl1_toff8_hstrt6_hend3_tpfd4 -> 21549.7 audible
+  tbl2_toff2_hstrt6_hend3_tpfd4 -> 15100.8
+  tbl2_toff3_hstrt6_hend3_tpfd4 -> 16724.0
+  tbl2_toff4_hstrt6_hend3_tpfd4 -> 18050.0
+  tbl2_toff5_hstrt6_hend3_tpfd4 -> 21923.4 audible
+  tbl2_toff6_hstrt6_hend3_tpfd4 -> 21602.5 audible
+  tbl2_toff7_hstrt6_hend3_tpfd4 -> 19237.7 audible
+  tbl2_toff8_hstrt6_hend3_tpfd4 -> 20965.4 audible
+  tbl3_toff1_hstrt6_hend3_tpfd4 -> 15139.6
+  tbl3_toff2_hstrt6_hend3_tpfd4 -> 16799.0
+  tbl3_toff3_hstrt6_hend3_tpfd4 -> 18274.7
+  tbl3_toff4_hstrt6_hend3_tpfd4 -> 23127.7 audible
+  tbl3_toff5_hstrt6_hend3_tpfd4 -> 23912.5 audible
+  tbl3_toff6_hstrt6_hend3_tpfd4 -> 24263.3 audible
+  tbl3_toff7_hstrt6_hend3_tpfd4 -> 24391.2 audible
+  tbl3_toff8_hstrt6_hend3_tpfd4 -> 25149.5 audible
+  tbl1_toff2_hstrt0_hend3_tpfd4 -> 15150.8
+  tbl1_toff2_hstrt1_hend3_tpfd4 -> 14860.9
+  tbl1_toff2_hstrt2_hend3_tpfd4 -> 14336.3
+  tbl1_toff2_hstrt3_hend3_tpfd4 -> 14054.7
+  tbl1_toff2_hstrt4_hend3_tpfd4 -> 13573.1
+  tbl1_toff2_hstrt5_hend3_tpfd4 -> 13407.0
+  tbl1_toff2_hstrt7_hend3_tpfd4 -> 12725.8
+  tbl1_toff2_hstrt7_hend0_tpfd4 -> 12991.4
+  tbl1_toff2_hstrt7_hend1_tpfd4 -> 12916.3
+  tbl1_toff2_hstrt7_hend2_tpfd4 -> 12777.0
+  tbl1_toff2_hstrt7_hend4_tpfd4 -> 12337.3
+  tbl1_toff2_hstrt7_hend5_tpfd4 -> 12419.8
+  tbl1_toff2_hstrt7_hend6_tpfd4 -> 12637.5
+  tbl1_toff2_hstrt7_hend7_tpfd4 -> 12879.5
+  tbl1_toff2_hstrt7_hend8_tpfd4 -> 13487.1
+  tbl1_toff2_hstrt7_hend9_tpfd4 -> 13234.1
+  tbl1_toff2_hstrt7_hend10_tpfd4 -> 13402.8
+  tbl1_toff3_hstrt7_hend4_tpfd4 -> 14459.6
+  tbl1_toff4_hstrt7_hend4_tpfd4 -> 14593.6
+  tbl1_toff5_hstrt7_hend4_tpfd4 -> 17606.6 audible
+  tbl1_toff6_hstrt7_hend4_tpfd4 -> 18334.0 audible
+  tbl1_toff7_hstrt7_hend4_tpfd4 -> 17915.5 audible
+  tbl1_toff8_hstrt7_hend4_tpfd4 -> 19367.1 audible
+  tbl2_toff1_hstrt7_hend4_tpfd4 -> 11625.6
+  tbl2_toff2_hstrt7_hend4_tpfd4 -> 13798.8
+  tbl2_toff3_hstrt7_hend4_tpfd4 -> 16081.3
+  tbl2_toff4_hstrt7_hend4_tpfd4 -> 17332.9
+  tbl2_toff5_hstrt7_hend4_tpfd4 -> 20961.9 audible
+  tbl2_toff6_hstrt7_hend4_tpfd4 -> 20204.4 audible
+  tbl2_toff7_hstrt7_hend4_tpfd4 -> 17367.5 audible
+  tbl2_toff8_hstrt7_hend4_tpfd4 -> 19751.9 audible
+  tbl3_toff1_hstrt7_hend4_tpfd4 -> 14785.3
+  tbl3_toff2_hstrt7_hend4_tpfd4 -> 15532.4
+  tbl3_toff3_hstrt7_hend4_tpfd4 -> 18093.5
+  tbl3_toff4_hstrt7_hend4_tpfd4 -> 21012.0 audible
+  tbl3_toff5_hstrt7_hend4_tpfd4 -> 23443.6 audible
+  tbl3_toff6_hstrt7_hend4_tpfd4 -> 23605.0 audible
+  tbl3_toff7_hstrt7_hend4_tpfd4 -> 23848.1 audible
+  tbl3_toff8_hstrt7_hend4_tpfd4 -> 23729.4 audible
+  tbl2_toff1_hstrt0_hend4_tpfd4 -> 14052.4
+  tbl2_toff1_hstrt1_hend4_tpfd4 -> 13691.4
+  tbl2_toff1_hstrt2_hend4_tpfd4 -> 13578.9
+  tbl2_toff1_hstrt3_hend4_tpfd4 -> 13301.8
+  tbl2_toff1_hstrt4_hend4_tpfd4 -> 12895.2
+  tbl2_toff1_hstrt5_hend4_tpfd4 -> 12416.1
+  tbl2_toff1_hstrt6_hend4_tpfd4 -> 11819.3
+  tbl2_toff1_hstrt7_hend0_tpfd4 -> 13187.3
+  tbl2_toff1_hstrt7_hend1_tpfd4 -> 12714.1
+  tbl2_toff1_hstrt7_hend2_tpfd4 -> 12493.6
+  tbl2_toff1_hstrt7_hend3_tpfd4 -> 11793.2
+  tbl2_toff1_hstrt7_hend5_tpfd4 -> 11131.6
+  tbl2_toff1_hstrt7_hend6_tpfd4 -> 11296.9
+  tbl2_toff1_hstrt7_hend7_tpfd4 -> 11283.0
+  tbl2_toff1_hstrt7_hend8_tpfd4 -> 11573.8
+  tbl2_toff1_hstrt7_hend9_tpfd4 -> 11815.5
+  tbl2_toff1_hstrt7_hend10_tpfd4 -> 12102.4
+  tbl2_toff1_hstrt7_hend5_tpfd0 -> 11927.6
+  tbl2_toff1_hstrt7_hend5_tpfd1 -> 10948.0
+  tbl2_toff1_hstrt7_hend5_tpfd2 -> 11762.7
+  tbl2_toff1_hstrt7_hend5_tpfd3 -> 11635.6
+  tbl2_toff1_hstrt7_hend5_tpfd5 -> 11972.6
+  tbl2_toff1_hstrt7_hend5_tpfd6 -> 11822.4
+  tbl2_toff1_hstrt7_hend5_tpfd7 -> 11489.4
+  tbl2_toff1_hstrt7_hend5_tpfd8 -> 12078.1
+  tbl2_toff1_hstrt7_hend5_tpfd9 -> 11975.3
+  tbl2_toff1_hstrt7_hend5_tpfd10 -> 11616.7
+  tbl2_toff1_hstrt7_hend5_tpfd11 -> 12234.2
+  tbl2_toff1_hstrt7_hend5_tpfd12 -> 11904.5
+  tbl2_toff1_hstrt7_hend5_tpfd13 -> 12172.1
+  tbl2_toff1_hstrt7_hend5_tpfd14 -> 12325.8
+  tbl2_toff1_hstrt7_hend5_tpfd15 -> 11870.4
+  tbl1_toff2_hstrt3_hend0_tpfd4 -> 14604.3
+  tbl1_toff3_hstrt3_hend0_tpfd4 -> 16503.1
+  tbl1_toff4_hstrt3_hend0_tpfd4 -> 17744.8
+  tbl1_toff5_hstrt3_hend0_tpfd4 -> 23225.0 audible
+  tbl1_toff6_hstrt3_hend0_tpfd4 -> 22146.9 audible
+  tbl1_toff7_hstrt3_hend0_tpfd4 -> 23162.8 audible
+  tbl1_toff8_hstrt3_hend0_tpfd4 -> 23495.7 audible
+  tbl2_toff1_hstrt3_hend0_tpfd4 -> 14586.4
+  tbl2_toff2_hstrt3_hend0_tpfd4 -> 16411.2
+  tbl2_toff3_hstrt3_hend0_tpfd4 -> 17596.3
+  tbl2_toff4_hstrt3_hend0_tpfd4 -> 19349.1
+  tbl2_toff5_hstrt3_hend0_tpfd4 -> 23468.1 audible
+  tbl2_toff6_hstrt3_hend0_tpfd4 -> 24487.5 audible
+  tbl2_toff7_hstrt3_hend0_tpfd4 -> 22740.4 audible
+  tbl2_toff8_hstrt3_hend0_tpfd4 -> 24034.1 audible
+  tbl3_toff1_hstrt3_hend0_tpfd4 -> 16060.1
+  tbl3_toff2_hstrt3_hend0_tpfd4 -> 18090.0
+  tbl3_toff3_hstrt3_hend0_tpfd4 -> 18951.9
+  tbl3_toff4_hstrt3_hend0_tpfd4 -> 24326.1 audible
+  tbl3_toff5_hstrt3_hend0_tpfd4 -> 24077.6 audible
+  tbl3_toff6_hstrt3_hend0_tpfd4 -> 24690.8 audible
+  tbl3_toff7_hstrt3_hend0_tpfd4 -> 25511.9 audible
+  tbl3_toff8_hstrt3_hend0_tpfd4 -> 25784.9 audible
+  tbl2_toff1_hstrt0_hend0_tpfd4 -> 15170.6
+  tbl2_toff1_hstrt1_hend0_tpfd4 -> 15126.1
+  tbl2_toff1_hstrt2_hend0_tpfd4 -> 14853.1
+  tbl2_toff1_hstrt4_hend0_tpfd4 -> 13797.7
+  tbl2_toff1_hstrt5_hend0_tpfd4 -> 13336.7
+  tbl2_toff1_hstrt6_hend0_tpfd4 -> 13323.1
+  tbl1_toff3_hstrt7_hend5_tpfd4 -> 14354.7
+  tbl1_toff4_hstrt7_hend5_tpfd4 -> 14384.3
+  tbl1_toff5_hstrt7_hend5_tpfd4 -> 17587.9 audible
+  tbl1_toff6_hstrt7_hend5_tpfd4 -> 17936.5 audible
+  tbl1_toff7_hstrt7_hend5_tpfd4 -> 17364.0 audible
+  tbl1_toff8_hstrt7_hend5_tpfd4 -> 17405.0 audible
+  tbl2_toff2_hstrt7_hend5_tpfd4 -> 13723.6
+  tbl2_toff3_hstrt7_hend5_tpfd4 -> 14688.2
+  tbl2_toff4_hstrt7_hend5_tpfd4 -> 16578.2
+  tbl2_toff5_hstrt7_hend5_tpfd4 -> 20295.6 audible
+  tbl2_toff6_hstrt7_hend5_tpfd4 -> 19956.0 audible
+  tbl2_toff7_hstrt7_hend5_tpfd4 -> 17274.3 audible
+  tbl2_toff8_hstrt7_hend5_tpfd4 -> 20229.0 audible
+  tbl3_toff1_hstrt7_hend5_tpfd4 -> 14967.1
+  tbl3_toff2_hstrt7_hend5_tpfd4 -> 15389.8
+  tbl3_toff3_hstrt7_hend5_tpfd4 -> 17674.1
+  tbl3_toff4_hstrt7_hend5_tpfd4 -> 20815.4 audible
+  tbl3_toff5_hstrt7_hend5_tpfd4 -> 23346.3 audible
+  tbl3_toff6_hstrt7_hend5_tpfd4 -> 23475.8 audible
+  tbl3_toff7_hstrt7_hend5_tpfd4 -> 23082.4 audible
+  tbl3_toff8_hstrt7_hend5_tpfd4 -> 23940.1 audible
+  tbl2_toff1_hstrt0_hend5_tpfd4 -> 14346.9
+  tbl2_toff1_hstrt1_hend5_tpfd4 -> 13837.3
+  tbl2_toff1_hstrt2_hend5_tpfd4 -> 13491.4
+  tbl2_toff1_hstrt3_hend5_tpfd4 -> 12899.7
+  tbl2_toff1_hstrt4_hend5_tpfd4 -> 12572.6
+  tbl2_toff1_hstrt5_hend5_tpfd4 -> 12000.1
+  tbl2_toff1_hstrt6_hend5_tpfd4 -> 11803.2
+  tbl1_toff2_hstrt3_hend7_tpfd4 -> 13073.1
+  tbl1_toff3_hstrt3_hend7_tpfd4 -> 15409.6
+  tbl1_toff4_hstrt3_hend7_tpfd4 -> 15946.7
+  tbl1_toff5_hstrt3_hend7_tpfd4 -> 19387.7 audible
+  tbl1_toff6_hstrt3_hend7_tpfd4 -> 20393.4 audible
+  tbl1_toff7_hstrt3_hend7_tpfd4 -> 20227.5 audible
+  tbl1_toff8_hstrt3_hend7_tpfd4 -> 21148.8 audible
+  tbl2_toff1_hstrt3_hend7_tpfd4 -> 12341.3
+  tbl2_toff2_hstrt3_hend7_tpfd4 -> 14589.5
+  tbl2_toff3_hstrt3_hend7_tpfd4 -> 16252.9
+  tbl2_toff4_hstrt3_hend7_tpfd4 -> 17997.0
+  tbl2_toff5_hstrt3_hend7_tpfd4 -> 22003.2 audible
+  tbl2_toff6_hstrt3_hend7_tpfd4 -> 21232.7 audible
+  tbl2_toff7_hstrt3_hend7_tpfd4 -> 19026.5 audible
+  tbl2_toff8_hstrt3_hend7_tpfd4 -> 21340.9 audible
+  tbl3_toff1_hstrt3_hend7_tpfd4 -> 15566.7
+  tbl3_toff2_hstrt3_hend7_tpfd4 -> 16290.6
+  tbl3_toff3_hstrt3_hend7_tpfd4 -> 18491.9
+  tbl3_toff4_hstrt3_hend7_tpfd4 -> 21440.6 audible
+  tbl3_toff5_hstrt3_hend7_tpfd4 -> 24394.4 audible
+  tbl3_toff6_hstrt3_hend7_tpfd4 -> 24589.1 audible
+  tbl3_toff7_hstrt3_hend7_tpfd4 -> 23845.8 audible
+  tbl3_toff8_hstrt3_hend7_tpfd4 -> 25404.6 audible
+  tbl2_toff1_hstrt0_hend7_tpfd4 -> 13822.5
+  tbl2_toff1_hstrt1_hend7_tpfd4 -> 13286.8
+  tbl2_toff1_hstrt2_hend7_tpfd4 -> 12867.2
+  tbl2_toff1_hstrt4_hend7_tpfd4 -> 11801.5
+  tbl2_toff1_hstrt5_hend7_tpfd4 -> 11491.8
+  tbl2_toff1_hstrt6_hend7_tpfd4 -> 11595.8
+  tbl1_toff2_hstrt2_hend15_tpfd4 -> 13957.4
+  tbl1_toff3_hstrt2_hend15_tpfd4 -> 14450.9
+  tbl1_toff4_hstrt2_hend15_tpfd4 -> 15947.2
+  tbl1_toff5_hstrt2_hend15_tpfd4 -> 19108.6 audible
+  tbl1_toff6_hstrt2_hend15_tpfd4 -> 18313.8 audible
+  tbl1_toff7_hstrt2_hend15_tpfd4 -> 19134.4 audible
+  tbl1_toff8_hstrt2_hend15_tpfd4 -> 19283.1 audible
+  tbl2_toff1_hstrt2_hend15_tpfd4 -> 13197.4
+  tbl2_toff2_hstrt2_hend15_tpfd4 -> 13973.9
+  tbl2_toff3_hstrt2_hend15_tpfd4 -> 15307.6
+  tbl2_toff4_hstrt2_hend15_tpfd4 -> 16720.1
+  tbl2_toff5_hstrt2_hend15_tpfd4 -> 19744.4 audible
+  tbl2_toff6_hstrt2_hend15_tpfd4 -> 20615.9 audible
+  tbl2_toff7_hstrt2_hend15_tpfd4 -> 19221.8 audible
+  tbl2_toff8_hstrt2_hend15_tpfd4 -> 21470.7 audible
+  tbl3_toff1_hstrt2_hend15_tpfd4 -> 14763.8
+  tbl3_toff2_hstrt2_hend15_tpfd4 -> 15962.0
+  tbl3_toff3_hstrt2_hend15_tpfd4 -> 16409.2
+  tbl3_toff4_hstrt2_hend15_tpfd4 -> 22107.3 audible
+  tbl3_toff5_hstrt2_hend15_tpfd4 -> 21314.2 audible
+  tbl3_toff6_hstrt2_hend15_tpfd4 -> 22286.8 audible
+  tbl3_toff7_hstrt2_hend15_tpfd4 -> 20979.1 audible
+  tbl3_toff8_hstrt2_hend15_tpfd4 -> 23345.1 audible
+  tbl2_toff1_hstrt0_hend15_tpfd4 -> 13448.2
+  tbl2_toff1_hstrt1_hend15_tpfd4 -> 13325.0
+  tbl2_toff1_hstrt2_hend1_tpfd4 -> 14136.0
+  tbl2_toff1_hstrt2_hend2_tpfd4 -> 14129.6
+  tbl2_toff1_hstrt2_hend3_tpfd4 -> 14109.3
+  tbl2_toff1_hstrt2_hend6_tpfd4 -> 13127.4
+  tbl2_toff1_hstrt2_hend8_tpfd4 -> 12446.4
+  tbl2_toff1_hstrt2_hend9_tpfd4 -> 11910.0
+  tbl2_toff1_hstrt2_hend10_tpfd4 -> 11717.6
+  tbl2_toff1_hstrt2_hend11_tpfd4 -> 11917.9
+  tbl2_toff1_hstrt2_hend12_tpfd4 -> 12431.3
+  tbl2_toff1_hstrt2_hend13_tpfd4 -> 12491.8
+  tbl2_toff1_hstrt2_hend14_tpfd4 -> 12834.4
+  tbl1_toff2_hstrt2_hend10_tpfd4 -> 13257.9
+  tbl1_toff3_hstrt2_hend10_tpfd4 -> 14947.8
+  tbl1_toff4_hstrt2_hend10_tpfd4 -> 15235.2
+  tbl1_toff5_hstrt2_hend10_tpfd4 -> 18865.9 audible
+  tbl1_toff6_hstrt2_hend10_tpfd4 -> 19697.7 audible
+  tbl1_toff7_hstrt2_hend10_tpfd4 -> 20085.3 audible
+  tbl1_toff8_hstrt2_hend10_tpfd4 -> 18659.6 audible
+  tbl2_toff2_hstrt2_hend10_tpfd4 -> 14855.1
+  tbl2_toff3_hstrt2_hend10_tpfd4 -> 16308.5
+  tbl2_toff4_hstrt2_hend10_tpfd4 -> 18381.1
+  tbl2_toff5_hstrt2_hend10_tpfd4 -> 21769.3 audible
+  tbl2_toff6_hstrt2_hend10_tpfd4 -> 21060.6 audible
+  tbl2_toff7_hstrt2_hend10_tpfd4 -> 19531.5 audible
+  tbl2_toff8_hstrt2_hend10_tpfd4 -> 21790.6 audible
+  tbl3_toff1_hstrt2_hend10_tpfd4 -> 15647.3
+  tbl3_toff2_hstrt2_hend10_tpfd4 -> 15970.1
+  tbl3_toff3_hstrt2_hend10_tpfd4 -> 17823.3
+  tbl3_toff4_hstrt2_hend10_tpfd4 -> 22194.6 audible
+  tbl3_toff5_hstrt2_hend10_tpfd4 -> 23880.6 audible
+  tbl3_toff6_hstrt2_hend10_tpfd4 -> 24314.8 audible
+  tbl3_toff7_hstrt2_hend10_tpfd4 -> 23327.7 audible
+  tbl3_toff8_hstrt2_hend10_tpfd4 -> 25092.9 audible
+  tbl2_toff1_hstrt0_hend10_tpfd4 -> 12653.0
+  tbl2_toff1_hstrt1_hend10_tpfd4 -> 12397.9
+  tbl2_toff1_hstrt3_hend10_tpfd4 -> 12303.6
+  tbl2_toff1_hstrt4_hend10_tpfd4 -> 12427.2
+  tbl2_toff1_hstrt5_hend10_tpfd4 -> 12605.1
+  tbl2_toff1_hstrt6_hend10_tpfd4 -> 12870.1
+  tbl2_toff1_hstrt2_hend10_tpfd0 -> 12468.3
+  tbl2_toff1_hstrt2_hend10_tpfd1 -> 12037.3
+  tbl2_toff1_hstrt2_hend10_tpfd2 -> 12150.2
+  tbl2_toff1_hstrt2_hend10_tpfd3 -> 12367.8
+  tbl2_toff1_hstrt2_hend10_tpfd5 -> 12514.7
+  tbl2_toff1_hstrt2_hend10_tpfd6 -> 12660.9
+  tbl2_toff1_hstrt2_hend10_tpfd7 -> 11964.4
+  tbl2_toff1_hstrt2_hend10_tpfd8 -> 12742.4
+  tbl2_toff1_hstrt2_hend10_tpfd9 -> 12899.8
+  tbl2_toff1_hstrt2_hend10_tpfd10 -> 12064.3
+  tbl2_toff1_hstrt2_hend10_tpfd11 -> 12867.1
+  tbl2_toff1_hstrt2_hend10_tpfd12 -> 12963.8
+  tbl2_toff1_hstrt2_hend10_tpfd13 -> 12423.7
+  tbl2_toff1_hstrt2_hend10_tpfd14 -> 12999.7
+  tbl2_toff1_hstrt2_hend10_tpfd15 -> 12925.4
+Descent best tbl2_toff1_hstrt7_hend5_tpfd1
+Validating 3 candidate(s) with 2 extra iterations each
+Validating 1 candidate(s) with 2 extra iterations each
+Validating 1 candidate(s) with 2 extra iterations each
+Validating 1 candidate(s) with 2 extra iterations each
+Measuring tbl2_toff1_hstrt7_hend5_tpfd4 / tbl2_toff3_hstrt5_hend2_tpfd4 back to back, 4 rounds: the gain is counted on these moves
+
+rank  tbl  toff  hstrt  hend  tpfd  magnitude   spread   n clicks   f_chop 
+1       2     1      7     5     1    11072.4   2067.6   6      0  65.2kHz 
+2       2     1      7     5     4    11102.4   1843.5  14      0  65.2kHz 
+3       2     1      7     8     4    11121.9   1505.2   2      0  65.2kHz 
+4       2     1      6     7     4    11210.4   1756.6   2      0  65.2kHz 
+5       2     1      7     5    10    11264.7   1548.0   2      0  65.2kHz 
+6       2     1      7     4     4    11307.5   1444.7   2      0  65.2kHz 
+7       2     1      7     5     3    11283.0   1466.4   2      0  65.2kHz 
+8       2     1      5     7     4    11336.8   1689.3   6      0  65.2kHz 
+9       2     1      2    10     4    11362.5   1653.9   2      0  65.2kHz 
+10      2     1      7     6     4    11331.3   2168.5   6      0  65.2kHz 
+
+vs Klipper defaults tbl2_toff3_hstrt5_hend2_tpfd4, back to back: 1.48x less vibration, lower in each of 4 rounds (16469 -> 11140)
+
+Recommended for printer.cfg:
+
+[tmc5160 stepper_y]
+driver_TBL: 2
+driver_TOFF: 1
+driver_HSTRT: 7
+driver_HEND: 5
+driver_TPFD: 4
+
+[tmc5160 stepper_y1]
+driver_TBL: 2
+driver_TOFF: 1
+driver_HSTRT: 7
+driver_HEND: 5
+driver_TPFD: 4
+Restoring baseline registers, homing
+Done in 30m: 558 ok, 0 failed -> /home/reapola/printer_data/config/chopper-autotune/datasets/20261103_093936_y
+
+=== Summary ===
+[tmc5160 stepper_x]
+driver_TBL: 2
+driver_TOFF: 1
+driver_HSTRT: 7
+driver_HEND: 3
+driver_TPFD: 4
+
+[tmc5160 stepper_x1]
+driver_TBL: 2
+driver_TOFF: 1
+driver_HSTRT: 7
+driver_HEND: 3
+driver_TPFD: 4
+# 1.49x less vibration than Klipper defaults
+
+
+[tmc5160 stepper_y]
+driver_TBL: 2
+driver_TOFF: 1
+driver_HSTRT: 7
+driver_HEND: 5
+driver_TPFD: 4
+
+[tmc5160 stepper_y1]
+driver_TBL: 2
+driver_TOFF: 1
+driver_HSTRT: 7
+driver_HEND: 5
+driver_TPFD: 4
+# 1.48x less vibration than Klipper defaults
+
+
+motor A: saving tbl2_toff1_hstrt7_hend3_tpfd4 into [tmc5160 stepper_x] and [tmc5160 stepper_x1] from run 20261103_090157_x
+motor B: saving tbl2_toff1_hstrt7_hend5_tpfd4 into [tmc5160 stepper_y] and [tmc5160 stepper_y1] from run 20261103_093936_y
+
+Saved the new registers to config/steppers.cfg. Copies of these files from before the save are in chopper-autotune/backups. Klipper is restarting
