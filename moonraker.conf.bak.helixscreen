@@ -145,14 +145,6 @@ path: ~/klipper-led_effect
 origin: https://github.com/julianschill/klipper-led_effect.git
 is_system_service: False
 
-[update_manager klipper_tmc_autotune]
-type: git_repo
-channel: dev
-path: ~/klipper_tmc_autotune
-origin: https://github.com/andrewmcgr/klipper_tmc_autotune.git
-managed_services: klipper
-primary_branch: main
-install_script: install.sh
 
 [update_manager klipper]
 channel: stable
@@ -166,3 +158,21 @@ managed_services: crowsnest
 system_dependencies: system-dependencies.json
 virtualenv: ~/crowsnest-env
 requirements: requirements.txt
+
+# HelixScreen Update Manager
+# Added by HelixScreen installer - enables one-click updates from Mainsail/Fluidd
+# NOTE: type: web is used instead of type: zip as a workaround for
+# mainsail-crew/mainsail#2444 (zip type always shows UP-TO-DATE).
+# A systemd path unit handles service restart after Moonraker extracts the update.
+[update_manager helixscreen]
+type: web
+channel: beta
+repo: prestonbrown/helixscreen
+path: /home/reapola/helixscreen
+
+[update_manager chopper-autotune]
+type: git_repo
+path: /home/reapola/chopper-autotune
+origin: https://github.com/anton-vinogradov/chopper-autotune.git
+primary_branch: main
+managed_services: klipper
