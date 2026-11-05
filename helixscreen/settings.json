@@ -292,7 +292,7 @@
             "temperature_sensor Octopus",
             "temperature_sensor raspberry_pi"
           ],
-          "timestamp": "2026-11-04T05:29:26Z"
+          "timestamp": "2026-11-05T23:29:03Z"
         },
         "optional": [
           "controller_fan casefans"
